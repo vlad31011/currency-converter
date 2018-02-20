@@ -1,0 +1,62 @@
+<body>
+<div class="row" style="margin: 30px">
+  <div class="col-lg-6">
+    <form>
+      <div class="form-group">
+        <div class="input-group">
+          <label style="margin-right: 75px">Select a Date: </label>
+          <input class="form-control" placeholder="yyyy-mm-dd" name="d"
+                 [(ngModel)]="date_model" [ngModelOptions]="{standalone: true}"
+                 ngbDatepicker #d="ngbDatepicker" required/>
+          <div class="input-group-addon" (click)="d.toggle()">
+            <i class="fa fa-calendar fa-sm" aria-hidden="true" style="cursor: pointer;"></i>
+          </div>
+        </div>
+        </div>
+
+      <div class="form-group">
+        <div class="input-group">
+          <label style="margin-right: 20px">Select input currency: </label>
+          <input type="text" class="form-control"
+                 [(ngModel)]="currency_input_type" [ngModelOptions]="{standalone: true}"
+                 [ngbTypeahead]="search" [resultFormatter]="formatter" [inputFormatter]="formatter"/>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="input-group">
+          <label style="margin-right: 10px">Select output currency: </label>
+          <input type="text" class="form-control"
+                 [(ngModel)]="currency_output_type" [ngModelOptions]="{standalone: true}"
+                 [ngbTypeahead]="search" [resultFormatter]="formatter" [inputFormatter]="formatter"/>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="input-group">
+          <label style="margin-right: 65px">Select number: </label>
+          <input type="text" class="form-control"
+                 [(ngModel)]="number_currency" [ngModelOptions]="{standalone: true}"/>
+        </div>
+      </div>
+      <div class="getInfo">
+        <button type="button" class="btn btn-primary" (click)="getCurrencies()"
+                style="margin-left: 10.2vw; width: 12vw">Get Info
+        </button>
+      </div>
+    </form>
+
+  </div>
+  <div class="col-lg-6">
+    <div
+      *ngIf="(answer !== undefined) && (number_currency !== undefined) && (currency_input_type !== undefined) && (currency_output_type !== undefined)"
+      style="display: inline-block; position: relative">
+      <h2 style="width: 24vw; margin: 0; position: absolute">IN {{number_currency}}
+        {{currency_input_type.Cur_Abbreviation}} {{resolve}} {{currency_output_type.Cur_Abbreviation}}</h2>
+      <h2 *ngIf="currency_output_type.Cur_Abbreviation === undefined"
+          style="position: absolute; margin-left: 18vw; width: 5vw">BLR</h2>
+    </div>
+  </div>
+</div>
+</body>
+
